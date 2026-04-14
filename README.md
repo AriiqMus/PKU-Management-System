@@ -32,7 +32,10 @@ A web-based University Health Center (Pusat Kesihatan Universiti) management sys
 
 ## Project Structure
 
+<<<<<<< HEAD
 ```
+=======
+>>>>>>> a3a557246bce137200e1599cbb80d05e01e5d342
 PKU Management System/
 ├── src/java/
 │   ├── dao/          # Data Access Objects (JDBC / PreparedStatements)
@@ -45,7 +48,12 @@ PKU Management System/
 │       └── web.xml   # Deployment descriptor
 ├── pkudb.sql         # Database schema + sample data
 └── build.xml         # Ant build configuration
+<<<<<<< HEAD
 ```
+=======
+
+
+>>>>>>> a3a557246bce137200e1599cbb80d05e01e5d342
 
 ---
 
@@ -67,6 +75,7 @@ PKU Management System/
 ```sql
 -- In MySQL/MariaDB:
 source pkudb.sql;
+<<<<<<< HEAD
 ```
 
 Or import `pkudb.sql` via phpMyAdmin / MySQL Workbench.
@@ -76,10 +85,19 @@ Or import `pkudb.sql` via phpMyAdmin / MySQL Workbench.
 Edit the connection settings in the DAO classes under `src/java/dao/`:
 
 ```java
+=======
+Or import pkudb.sql via phpMyAdmin / MySQL Workbench.
+
+2. Configure Database Connection
+Edit the connection settings in the DAO classes under src/java/dao/:
+
+
+>>>>>>> a3a557246bce137200e1599cbb80d05e01e5d342
 // Default values (update as needed)
 String url = "jdbc:mysql://localhost:3306/pkudb";
 String user = "root";
 String password = "";
+<<<<<<< HEAD
 ```
 
 ### 3. Build
@@ -131,3 +149,36 @@ http://localhost:8080/PKU_Usman_/
 - Passwords are stored as **plain text** — implement bcrypt or similar hashing before any production deployment.
 - Database credentials are **hardcoded** in DAO classes — move to environment variables or a config file for production.
 - SQL injection protection is in place via `PreparedStatements`.
+=======
+3. Build
+
+ant build
+Or in NetBeans: Build → Build Project
+
+4. Deploy
+Copy the generated WAR file to Tomcat's webapps/ directory, or deploy directly from NetBeans: Run → Deploy Project
+
+5. Access
+
+http://localhost:8080/PKU_Usman_/
+Default Credentials
+User ID	Password	Role	Name
+U002	admin456	Admin	Sarah Lim
+U001	pass123	Doctor	Adam Loo
+U003	pass789	Receptionist	Lisa Wongi
+U004	docpass	Doctor	Dr. Nur Aliah
+Architecture
+MVC Pattern:
+
+Models — model/ package (User, Patient, Appointment, Treatment, Payment, Staff)
+Views — JSP pages in web/
+Controllers — Servlet classes in servlet/
+DAO Pattern — Each entity has a dedicated DAO using JDBC PreparedStatements for SQL query safety.
+
+Security Notes
+This project is intended for educational/academic use.
+
+Passwords are stored as plain text — implement bcrypt or similar hashing before any production deployment.
+Database credentials are hardcoded in DAO classes — move to environment variables or a config file for production.
+SQL injection protection is in place via PreparedStatements.
+>>>>>>> a3a557246bce137200e1599cbb80d05e01e5d342
