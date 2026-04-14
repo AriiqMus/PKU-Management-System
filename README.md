@@ -32,3 +32,79 @@ A web-based University Health Center (Pusat Kesihatan Universiti) management sys
 
 ## Project Structure
 
+PKU Management System/
+├── src/java/
+│   ├── dao/          # Data Access Objects (JDBC / PreparedStatements)
+│   ├── model/        # Entity classes (User, Patient, Appointment, etc.)
+│   └── servlet/      # HTTP request handlers (controllers)
+├── web/
+│   ├── *.jsp         # JSP views (33 pages)
+│   ├── styles/       # CSS stylesheets
+│   └── WEB-INF/
+│       └── web.xml   # Deployment descriptor
+├── pkudb.sql         # Database schema + sample data
+└── build.xml         # Ant build configuration
+
+
+
+---
+
+## Database Schema
+
+12 tables: `users`, `patient`, `appointment`, `treatment`, `payment`, `doctor`, `receptionist`, `admin`, `illness`, `medicine`, `treatmentillness`, `treatmentmedicine`
+
+---
+
+## Setup & Installation
+
+### Prerequisites
+- Java JDK 8+
+- Apache Tomcat 9+
+- MySQL / MariaDB 5.7+ or 10.4+
+
+### 1. Database Setup
+
+```sql
+-- In MySQL/MariaDB:
+source pkudb.sql;
+Or import pkudb.sql via phpMyAdmin / MySQL Workbench.
+
+2. Configure Database Connection
+Edit the connection settings in the DAO classes under src/java/dao/:
+
+
+// Default values (update as needed)
+String url = "jdbc:mysql://localhost:3306/pkudb";
+String user = "root";
+String password = "";
+3. Build
+
+ant build
+Or in NetBeans: Build → Build Project
+
+4. Deploy
+Copy the generated WAR file to Tomcat's webapps/ directory, or deploy directly from NetBeans: Run → Deploy Project
+
+5. Access
+
+http://localhost:8080/PKU_Usman_/
+Default Credentials
+User ID	Password	Role	Name
+U002	admin456	Admin	Sarah Lim
+U001	pass123	Doctor	Adam Loo
+U003	pass789	Receptionist	Lisa Wongi
+U004	docpass	Doctor	Dr. Nur Aliah
+Architecture
+MVC Pattern:
+
+Models — model/ package (User, Patient, Appointment, Treatment, Payment, Staff)
+Views — JSP pages in web/
+Controllers — Servlet classes in servlet/
+DAO Pattern — Each entity has a dedicated DAO using JDBC PreparedStatements for SQL query safety.
+
+Security Notes
+This project is intended for educational/academic use.
+
+Passwords are stored as plain text — implement bcrypt or similar hashing before any production deployment.
+Database credentials are hardcoded in DAO classes — move to environment variables or a config file for production.
+SQL injection protection is in place via PreparedStatements.
